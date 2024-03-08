@@ -21,11 +21,11 @@ const history = [];
 
 app.use(express.static('public'));
 
-/*
+
 app.get('/', (req, res) => {
-  res.sendFile(resolve(__dirname, 'public/index.html'));
+  res.sendFile(resolve(__dirname, 'client_chat.html'));
 });
-*/
+
 
 let currentUserCount = 0;
 

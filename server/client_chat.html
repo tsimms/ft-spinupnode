@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Chat</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <style>
+  * {
+    box-sizing: border-box;
+  }
+  
+  body {
+    margin: 0;
+    padding: 1rem;
+    font-family: system-ui, sans-serif;
+    color: black;
+    background-color: white;
+  }
+
+  .modal {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    background-color: #ccc;
+    opacity: 0.9;
+  }
+  .container { border: 1px solid #ccc; padding: 6px; }
+  .modal .container { border: 1px solid #333; background-color: #fff; }
+  .center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -48%);
+  }
+  .hide { display: none; }
+  
+  h1 {
+    font-weight: 800;
+    font-size: 1.5rem;
+  }
+  
+  #history {
+    border: 1px solid #ccc;
+    height: 400px;
+    width: 100%;
+    overflow: scroll;
+    padding: 5px;
+  }
+  
+  #history .time {
+    font-weight: bold;
+  }
+  
+  #history .message {
+    padding-left: 3px;
+  }
+  
+  input#chatInput {
+    width: 100%;
+  }
+  
+  #input {
+    display: inline-flex;
+    width: 100%;
+  }
+    </style>
+  </head>
+  <body>
+    <h1>Hello <span id="nickname-value"></span></h1>
+    <div id="user-count" class="container"></div>
+    <div id="history"></div>
+    <div id="input">
+      <input type="text" id="chatInput" name="msg" />
+      <button id="chatSend">Send</button>
+    </div>
+    <div id="nickname-modal" class="modal show">
+      <div class="container center">
+        <span class="label">Enter nickname </span>
+        <input id="nickname" name="nickname" text="text" />  
+      </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <!-- <script src="client_chat.js"></script> -->
+  </body>
+</html>
