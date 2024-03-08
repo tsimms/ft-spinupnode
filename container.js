@@ -5,13 +5,9 @@ const startServer = async (options) => {
   const { staticFiles } = options;
 
   const webcontainerInstance = await WebContainer.boot();
-  //await webcontainerInstance.mount(files);
-  //const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  //const nocache = Array.from({ length: 8 }, () => characters[Math.floor(Math.random() * characters.length)]).join('');
 
   try {
     await Promise.all(staticFiles
-      .map(f => `${f}?${nocache}`)
       .map(file => {
         const filename = file.replace(/^.*\//g, "");
         const outputFilename = filename.replace(/\?.*$/, "");
@@ -40,13 +36,12 @@ const startServer = async (options) => {
     }
   }));
   await installProcess.exit;
-  const runtimeProcess = await webcontainerInstance.spawn('npm', ['run', 'server']);
+  const runtimeProcess = await webcontainerInstance.spawn('npm', ['run', 'chat']);
   runtimeProcess.output.pipeTo(new WritableStream({
     write(data) {
       log(data);
     }
   }))
-
 
 
   webcontainerInstance.on('error', (err) => {
