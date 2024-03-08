@@ -19,12 +19,12 @@ const getSystemEntry = (text) => {
 
 const history = [];
 
-app.use(express.static('public'));
-
-
+app.use(express.static('.'));
 app.get('/', (req, res) => {
   res.sendFile(resolve(__dirname, 'client_chat.html'));
 });
+
+app.get('/client_chat.html')
 
 
 let currentUserCount = 0;
@@ -48,7 +48,7 @@ io.on('connection', (socket) => {
      if (! (socket.nickname && users[socket.nickname]))  {
       users[socket.nickname] = {
         nickname: socket.nickname,
-        color: getRandomColor()
+        color: null
       }
     }
 
