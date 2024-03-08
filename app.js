@@ -1,12 +1,19 @@
 import container from './container.js';
 
-const server = await container({
-  staticFiles: [
-    'https://raw.githubusercontent.com/tsimms/ft-spinupnode/init/server/server_hello.js',
-    'https://raw.githubusercontent.com/tsimms/ft-spinupnode/init/server/server_chat.js',
-    'https://raw.githubusercontent.com/tsimms/ft-spinupnode/init/server/client_chat.html',
-    'https://raw.githubusercontent.com/tsimms/ft-spinupnode/init/server/client_chat.js',
-    'https://raw.githubusercontent.com/tsimms/ft-spinupnode/init/server/package.json'
-  ]
-});
-const { webcontainerInstance } = server;
+const branch = 'main';
+
+(async () => {
+  const branchUrl = `https://raw.githubusercontent.com/tsimms/ft-spinupnode${branch ? `/${branch}` : ''}`;
+  const server = await container({
+    staticFiles: [
+      `${branchUrl}/server/server_hello.js`,
+      `${branchUrl}/server/server_chat.js`,
+      `${branchUrl}/server/client_chat.html`,
+      `${branchUrl}/server/client_chat.js`,
+      `${branchUrl}/server/package.json`
+    ]
+  });
+  const { webcontainerInstance, serverUrl } = server;
+//  document.getElementById('chat-frame').innerHTML = `<iframe src="${serverUrl}"></iframe>`;
+})()
+
