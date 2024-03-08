@@ -49,12 +49,6 @@ const startServer = async (options) => {
   });
   const waitForStartups = [
     new Promise(resolve => {
-      webcontainerInstance.on('port', (port, type, url) => {
-        log(JSON.stringify({ port, type, url }));
-        if (port === 8080) resolve({ enrichmentUrl: url });
-      })
-    }),
-    new Promise(resolve => {
       webcontainerInstance.on('server-ready', (port, url) => {
         log(`Server is ready! URL: ${url}`);
         resolve({ serverUrl: url });
@@ -65,9 +59,9 @@ const startServer = async (options) => {
   const urls = (await Promise.all(waitForStartups))
     .reduce((acc, obj) => Object.assign(acc, obj), {})
   log(`got all the Urls: ${urls}`);
-  const { enrichmentUrl, serverUrl } = urls;
-  return { webcontainerInstance, serverUrl, enrichmentUrl };
+  const { serverUrl } = urls;
+  return { webcontainerInstance, serverUrl };
 };
 
 
-export default startServer;  
+export default startServer;
