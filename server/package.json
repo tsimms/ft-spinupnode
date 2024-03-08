@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "hello": "node server_hello.js",
-    "chat": "node server_chat.js"
+    "chat": "node server_chat.js",
+    "start": "node server_hello.js"
   },
   "author": "",
   "license": "ISC",
